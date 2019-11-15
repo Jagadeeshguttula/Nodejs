@@ -1,0 +1,62 @@
+<!-- <p>
+    <a routerLink="cat">Open Category</a>
+    &nbsp;&nbsp;
+    <a routerLink="subcat">Open Sub category</a>
+    </p>
+    <router-outlet>
+    
+    </router-outlet>  -->
+   <!-- <a mat-button [routerLink]="'cat'"> Accounts </a> -->
+
+<mat-drawer-container style="height:1000px">
+<mat-drawer #drw style="height:1000px; width:250px;background-color:darkslateblue;"> 
+    
+    <h1>Dashboard<span class="fa fa-times"(click)="drw.toggle()"style="font-size:30px;margin-left:10px;cursor:pointer;"></span>
+        <!-- <img src="../../../assets/cancel.jpg" (click)="drw.toggle()"style="height:30px; width:30px;margin-left:20px"> -->
+    </h1>
+    
+    <ul>
+      <li><a routerLink="cat">category</a></li>
+      <li><a routerLink="subcat">sub category</a></li>
+      <li><a routerLink="subsubcat">subsub category</a></li>
+      <li><a routerLink="brand">brand</a></li>
+      <li><a routerLink="products">products</a></li>
+    </ul>
+</mat-drawer>
+<mat-drawer-content>
+    <mat-toolbar color="primary">
+<mat-toolbar-row>
+<span class="fa fa-bars"(click)="drw.toggle()"style="font-size:30px;cursor:pointer;"></span>
+<!-- <img src="../../../assets/click.png" (click)="drw.toggle()" style="height:30px;width:30px;"> -->
+<button mat-raised-button  color=primary style="color: white;margin-left:10px;font-size:15px;outline: none;"
+[matMenuTriggerFor]="btnmenu">Report</button>
+<mat-menu #btnmenu>
+    <button mat-button style="display:block;width:100%;" >Daily</button>
+    <button mat-button style="display:block;width:100%;">Weekly</button>
+    <button mat-button style="display:block;width:100%;">Yealy</button>
+
+</mat-menu>
+<button mat-raised-button  color=primary style="color: white;margin-left:10px;font-size:15px;outline: none;"
+[matMenuTriggerFor]="btnmenu">order</button>
+<mat-menu #btnmenu>
+ <button mat-button style="display:inline-block;width:100%;" >pending</button>
+ <button mat-button style="display:inline-block;width:100%;">status</button>
+ <button mat-button style="display:inline-block;width:100%;">Yealy</button>
+
+</mat-menu>
+<button mat-raised-button  color=primary style="color: white;margin-left:10px;font-size:15px;outline: none;"
+[matMenuTriggerFor]="btnmenu">Report</button>
+<mat-menu #btnmenu>
+ <button mat-button style="display:inline-block;width:100%;" >Daily</button>
+ <button mat-button style="display:inline-block;width:100%;">Weekly</button>
+ <button mat-button style="display:inline-block;width:100%;">Yealy</button>
+
+</mat-menu>
+</mat-toolbar-row>
+</mat-toolbar>  
+<router-outlet>
+    
+    </router-outlet>
+</mat-drawer-content>
+
+</mat-drawer-container>

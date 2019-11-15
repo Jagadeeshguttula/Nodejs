@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="nav">
+        <div class="col-sm-12">
+            <h1>SubCategory</h1>
+            <br>
+<mat-form-field style="color:black; font-size:30px; width:100%">
+    <input type="text" matInput placeholder="Enter SubCategory Name">
+</mat-form-field>
+
+<mat-form-field style="color:black; font-size:30px; width:100%">
+<input type="text" placeholder="Category Name" matInput>
+</mat-form-field>
+
+
+<button type="button" mat-raised-button color=accent style="margin-bottom:30px; outline: none;">
+    <span class="fa fa-tags" style="font-size: 20px; margin-left:-13px;">
+    </span>  SubCategory</button>
+    <br>
+    <mat-form-field  style="color:black; font-size:30px; width:100%">
+        <input type="text" placeholder="Search SubCategory Name" matInput [(ngModel)]="searchstatus">
+    </mat-form-field>
+</div>
+<br><br>
+<div class="col-sm-12">
+    <table class="table table-striped">
+        <tr>
+            <th>Catid</th>
+            <th>Sno</th>
+            <th (click)="ord=!ord">SubCategory
+                <span class="fa fa-sort-desc" *ngIf="ord"></span>
+                <span class="fa fa-sort-asc" *ngIf="!ord"></span>         
+                     </th>
+            <th>Status</th>
+            <th>Operation</th>
+        </tr>
+        <tr *ngFor="let x of tblsubcategory |paginate:{itemsPerPage:4,currentPage:pno} |orderBy:'subcatname':ord |filter:searchstatus">
+
+           <td>{{x.catid}}</td>
+            <td>{{x._id}}</td>
+            <ng-container *ngIf="tmp!=x._id; else elsediv">
+            <td>{{x.subcatname}}</td>
+            <td>
+                <span *ngIf="x.active==0">Inactive</span>
+                <span *ngIf="x.active==1">Active</span>
+
+            </td>
+            <td>
+            <button mat-fab style="height:40px; width:40px;outline:none" (click)="funedit(x)">
+                <span class="fa fa-edit"  
+                style="font-size:20px; margin-top:-15px;margin-left:5px; cursor: pointer;">
+                </span>
+            </button>
+            <!-- <button mat-fab style="height:40px; width:40px;outline:none; margin-left:10px;">
+                <span class="fa fa-trash" style="font-size:20px; margin-top:-15px"></span>
+            </button> -->
+            </td>
+        </ng-container>
+        </tr>
+    </table>
+   <ng-template #elsediv>
+<mat-form-field>
+    <input type="text" placeholder="change text" matInput [(ngModel)]="txtsubcat">
+</mat-form-field>
+<td>
+    <mat-form-field>
+        <mat-select [(ngModel)]="dropdownstatus" [placeholder]="'Select'" required>
+        <mat-option value="1">Active</mat-option>
+        <mat-option value="0">Inactive</mat-option>
+    </mat-select>
+    </mat-form-field>
+</td>
+<td>
+
+        <button mat-mini-fab color="warn" (click)="tmp=0" style="outline:none">
+                <span class="fa fa-close"></span>
+    </button>
+    <button mat-mini-fab color="primary" style="outline: none; margin-left:10px;">
+       <span class="fa fa-save"></span>
+    </button>
+</td>
+
+   </ng-template>
+</div>
+</div>
+</div>
+<pagination-controls (pageChange)="pno=$event"></pagination-controls>

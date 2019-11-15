@@ -1,0 +1,36 @@
+Day3(09-11-2019)
+installing packages 
+npm install ngx-pagination
+*ngFor="let item of collection | paginate: { itemsPerPage: 10, currentPage: p, totalItems: res.count }
+<pagination-controls (pageChange)="p = $event" id="second"></pagination-controls>
+
+npm i ng2-search-filter
+npm install ngx-order-pipe
+importing purpose 
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
+
+
+day:4(12-11-2019)
+install below packages
+npm i express body-parser cors mongodb jsonwebtoken
+create project structru
+admin           add folder main  Backend
+user              
+services
+gaurds
+models
+settings.ts
+
+day5(13-11-2019)
+create collection ..>tbl_admin_login
+After:
+Gaurds..> create service file for rolebased purpose
+         >ng g s roleadmin
+Services folder..> create a service file for authenticaton purpose
+         >ng g s auth 
+cretae two component in admin folder
+         >ng g c login
+         >ng g c notauthrozied
+Go to          
