@@ -22,8 +22,13 @@ import { BrandComponent } from './brand/brand.component';
 import { ProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
 import { NotauthorisedComponent } from './notauthorised/notauthorised.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LogoutComponent } from './logout/logout.component';
+import {ReactiveFormsModule} from "@angular/forms"
+import {MatIconModule} from "@angular/material/icon"
+import {AgGridModule} from "@ag-grid-community/angular"
 
-const obj:Routes= [
+const obj:Routes= [  
 {path:"",component:AdmincommonComponent,
 children:[
   {path:"cat",component:CategoryComponent,
@@ -37,6 +42,8 @@ children:[
   {path:"products",component:ProductsComponent,
   canActivate:[RoleadminService],data:{role:"manager"}},
   {path:"login",component:LoginComponent},
+  {path:"logout",component:LogoutComponent},
+  {path:"welcome",component:WelcomeComponent,canActivate:[RoleadminService],data:{role:"cmn"}},
   {path:"**",component:NotauthorisedComponent}
 ]}
 ];
@@ -45,8 +52,11 @@ children:[
     SubcategoryComponent,
     SubsubcategoryComponent, 
     BrandComponent, 
-    ProductsComponent, LoginComponent,NotauthorisedComponent],
+    ProductsComponent, LoginComponent,NotauthorisedComponent, WelcomeComponent, LogoutComponent],
   imports: [
+    AgGridModule.withComponents([]),
+    MatIconModule,
+    ReactiveFormsModule,
     FormsModule,
     OrderModule,
     Ng2SearchPipeModule,

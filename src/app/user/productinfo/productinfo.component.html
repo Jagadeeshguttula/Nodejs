@@ -1,0 +1,48 @@
+        <div class="container">
+            <br>
+           <div class="row" *ngFor="let data of prodata">
+             <div class="col-sm-4">
+                 <img src="../../../assets/productuploadimages/{{bigimg}}"  class="zoomin">
+                 <br>
+                 <span *ngFor="let iname of data.images" >
+                 <img src="../../../assets/productuploadimages/{{iname}}" class="img-thumbnail imagesmall" (click)="bigimg=iname">
+                 &nbsp;
+                </span>
+                </div>
+             <div class="col-sm-7">
+                <h2>{{data.pname | titlecase}} <span class="fa fa-heart iconclr"></span> </h2>       
+        
+                 <br>
+                <div>
+                    <span *ngFor="let star of ratarr " class="fa fa-star" style="color:darkorange;font-size: 20px;">
+                        
+                    </span>
+                    <span *ngIf="halfstar" class="fa fa-star-half-o" style="color:darkorange;font-size: 20px;">
+                        
+                        </span>
+                        <span style="margin-left:30px;font-size:20px;color:red">{{data.newprice | currency:"INR"}}</span>
+                        <span style="margin-left:30px;font-size:17px;font-weight:bold; color:black;text-decoration:line-through">{{data.oldprice | currency:"INR"}}</span>
+        
+                </div>
+                <br>
+                <div>
+                    {{data.description}}
+                </div>
+                <br>
+                <li *ngFor="let offer of offerarr" style="color:orangered; font-weight: bold;">
+                <img src="../../../assets/images/offerlogo.png" width="30px"> {{offer}}
+                </li>
+                <div *ngFor="let color of newcolors" style="width:20px;height:20px;float:left;margin-right:10px" [ngStyle]="{backgroundColor:color}">
+        
+                </div> 
+                <br><br>
+                <button (click)="funaddcart()" class="btn btn-success"  style="font-size: 20px;"> <span class="fa fa-shopping-cart" style="font-size: 20px;"></span>  ADD TO CART</button>
+                <button class="btn clr" style="font-size: 20px;" (click)="funadd()">
+                    <span class="fa fa-bolt " style="font-size: 20px;"></span> BUY NOW</button>
+                <!-- <button class="btn clr" style="font-size: 20px;" (click)="funadd()"><span class="fa fa-bolt" style="font-size: 20px;"></span> BUY NOW</button> -->
+             </div>
+        
+             
+           </div>
+        </div>
+        

@@ -1,0 +1,19 @@
+.closeicon{
+    font-size: 70px;
+        font-weight: bold;
+        color:whitesmoke;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: -31px;
+        z-index: 99;
+        color: red;
+        font-size: 34px;
+    }
+    .closeicon:hover{
+        color:white;
+        outline:none;
+    }
+    mat-radio-button{
+        margin-left:10px;
+    }

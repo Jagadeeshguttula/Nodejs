@@ -1,0 +1,83 @@
+<div class="container">
+    
+  <div class="row">
+
+    <div class="col-lg-3 col-md-3 " *ngFor="let product of prodata">
+        <div   style="box-shadow:0px 0px 10px silver;margin-bottom:10px;height:400px;margin-right:30px;border-radius:5px">
+            <h3>
+                {{product.pname}} 
+                <span style="background-color:blue;padding:6px;border-radius:5px;box-shadow:1px 1px 5px silver;
+                margin-right:10px;font-size:15px;margin-left:30px;color:white;font-weight:bold">{{product.rating}} &nbsp;<span style="font-size:15px;margin-top:20px;" class="fa fa-star"></span></span>
+            </h3>
+            <img width="150px" height="180px" src="../../../assets/productuploadimages/{{product.images[0]}}">
+         <br><div>
+            <span>{{product.newprice | currency:"Rs:"}}</span>  
+         &nbsp;<span style="color:red;text-decoration:line-through;font-weight:bold">{{product.oldprice | currency:"Rs:"}}</span>
+         <br>
+         Available in
+         <br></div>
+         <div *ngFor="let color of product.newcolors" style="width:20px;height:20px;float:left;margin-right:10px" [ngStyle]="{backgroundColor:color}">
+         
+         </div>
+         <br><br>
+         <input type="button" [routerLink]="['../productinfo',{pid:product._id}]" value="More" class="btn btn-primary">
+         <div style="float:right">
+                 <button  mat-mini-fab  color="accent" style="margin-right:5px">
+                    <span class="fa fa-shopping-cart"></span>
+                 </button>
+                 <button  mat-mini-fab color="warn">
+                         <span class="fa fa-heart"></span>
+         
+                 </button>
+         </div>
+         </div>
+
+    </div>
+</div>
+</div>
+<!-- <div class="container">
+        <div class="row">
+                <div class="col-lg-3 col-md-3 " *ngFor="let product of prodata">
+<div  class="card" style="width: 18rem;"><h5>{{product.pname}} </h5>
+    <img class="card-img-top" src="../../../assets/productuploadimages/{{product.images[0]}}" height="100"width="100" alt="Card image cap">
+    <div class="card-body">
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+  </div>
+</div>
+</div>
+</div>  -->
+
+<!--<div class="container">
+    <h1>Dell</h1>
+  <div class="row">
+      <br><br>
+  <div *ngFor="let product of prodata" class="col-sm-3" style="box-shadow:0px 0px 10px silver;height:400px;margin-right:30px;border-radius:5px">
+   <h3>
+       {{product.pname}} 
+       <span style="background-color:blue;padding:6px;border-radius:5px;box-shadow:1px 1px 5px silver;;margin-right:10px;font-size:15px;margin-left:30px;color:white;font-weight:bold">{{product.rating}} &nbsp;<span style="font-size:15px;margin-top:20px;" class="fa fa-star"></span></span>
+   </h3>
+   <img width="200px" height="180px" src="../../../assets/productuploadimages/{{product.images[0]}}">
+<br>
+   <span>{{product.newprice}}</span>  
+&nbsp;<span style="color:red;text-decoration:line-through;font-weight:bold">{{product.oldprice }}</span>
+<br><br>
+Available in
+<br>
+<div *ngFor="let color of product.color" style="width:20px;height:20px;float:left;margin-right:10px" [ngStyle]="{backgroundColor:color}">
+
+</div>
+<br><br>
+<input type="button"  value="More" class="btn btn-primary">
+<div style="float:right">
+        <button  mat-mini-fab  color="accent" style="margin-right:5px">
+           <span class="fa fa-shopping-cart"></span>
+        </button>
+        <button  mat-mini-fab color="warn">
+                <span class="fa fa-heart"></span>
+
+        </button>
+</div>
+</div>
+</div>
+</div> -->

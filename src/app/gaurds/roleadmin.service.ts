@@ -10,7 +10,7 @@ export class RoleadminService implements CanActivate {
   if(localStorage.getItem("token"))
   {
    var localobj=decode(localStorage.getItem("token"))
-   if(obj.data.role===localobj.role)
+   if(obj.data.role===localobj.role || localobj.role=="superadmin" || obj.data.role=="cmn")
    return true;
    else
    {

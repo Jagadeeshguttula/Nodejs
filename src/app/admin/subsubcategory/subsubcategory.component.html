@@ -1,1 +1,256 @@
-<p>subsubcategory works!</p>
+<div class="container">
+    <div class="nav">
+        <div class="col-sm-12">
+            &nbsp;
+            <mat-form-field style="color:black; font-size:18px;width:30%" [formGroup]="myform" appearance="outline">
+                <mat-label>Enter SubSub CategoryName</mat-label>
+                <input type="text" matInput [(ngModel)]="txtsubsubcat" formControlName="subsubcatname">
+            </mat-form-field>
+            <br>
+            <span *ngIf="submitted && myform.controls.subsubcatname.errors && myform.controls.subsubcatname.errors.required" class="alert alert-danger"> 
+                 Required SubSubCatName....!
+            </span>
+            <span *ngIf="myform.controls.subsubcatname.valid" class="alert alert-success">Valid SubSubCatName....!</span>
+            <br><br>
+            <mat-form-field style="color:black; font-size:18px;width:30%; margin-left: 4px;" [formGroup]="myform" appearance="outline">
+                <mat-label> Select SubcatData</mat-label>
+                    <!-- <input type="text" placeholder="Sub Category Name" matInput [(ngModel)]="txtsubcat" formControlName="subcatname"> -->
+                    <mat-select [(ngModel)]="txtsubcat" formControlName="subcatname">
+                        <mat-option *ngFor="let x of subcatdata" value="{{x._id}}">
+                            {{x.subcatname}}
+
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <span *ngIf="submitted && myform.controls.subcatname.errors && myform.controls.subcatname.errors.required" 
+                class="alert alert-danger"> 
+                    Required SubCatName....!
+                </span>
+                <span *ngIf="myform.controls.subcatname.valid" class="alert alert-success">Valid SubCatName....!</span>
+                <br><br>
+                <!-- <mat-form-field style="color:black; font-size:20px;width:50%" [formGroup]="myform">
+                        <input type="text" placeholder="Category Name" matInput [(ngModel)]="txtcatname" formControlName="catname">
+                    </mat-form-field>
+                    <br>
+                    <span *ngIf="submitted && myform.controls.catname.errors && myform.controls.catname.errors.required" class="alert alert-danger"> 
+                        Required CatName....!
+                    </span>
+                    <span *ngIf="myform.controls.catname.valid" class="alert alert-success">Valid CatName....!</span> -->
+                    
+                <button mat-raised-button color="accent" style="outline:none; font-size:25px; font-weight: bolder;" (click)="funsavesubsubcat()">
+                     <span class="fa fa-tags" style="margin-left:-13px;"></span>Insert Data</button>
+                     <br><br>
+                     <mat-form-field style="font-size:18px;width:30%" appearance="outline">
+                        <mat-label> <i class="fa fa-search" style="font-size: 20px; outline: none;"></i>
+                            Search SubSubCategory Data</mat-label>
+                         <input type="text" matInput [(ngModel)]="searchsubsubcat">
+                        </mat-form-field>
+                     <br><br>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                    
+                    <th (click)="subasds=!subasds">SubSubCategory
+                            <span class="fa fa-sort-desc"*ngIf=subasds></span>
+                            <span class="fa fa-sort-asc"*ngIf=!subasds></span>
+                    </th>
+                    <th>Subcatname</th>
+                    <th>Status</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let x of subsubtbl|paginate:{itemsPerPage:3,currentPage:pno}|filter:searchsubsubcat|orderBy:'subsubcatname':subasds">
+                        
+                        <ng-container *ngIf="tmp!=x._id;else editrow">
+                        <td>{{x.subsubcatname}}</td>
+                        <td>{{x.subcategorydata.subcatname}}</td>
+                        <td>
+                            <span *ngIf="x.active==0">Inactive</span>
+                            <span *ngIf="x.active==1">Active</span>
+                        </td>
+                        <td>
+                            <button mat-fab color=accent style="height:40px;width:40px;outline:none" (click)="funedit(x)">
+                                <span class="fa fa-edit" style="font-size:20px; margin-left:5px; margin-top:-15px;"></span>
+                            </button>
+                        </td>
+                    </ng-container>
+                    </tr>
+                </tbody>
+                </table>
+
+                <ng-template #editrow>
+                    <td>
+                    <mat-form-field>
+                        <input type="text" placeholder="Edit subsubcatname" matInput [(ngModel)]="subsubcatname">
+                    </mat-form-field>
+                </td>
+                    <td>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="subcatname" [placeholder]="'Edit subcat data'" required>
+                                    <mat-option *ngFor="let x of subcatdata" value="{{x.subcat_id}}">
+                                        {{x.subcatname}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    <!-- <td>
+                        <mat-form-field>
+                            <input type="text" placeholder="change cat name" [(ngModel)]="catname" matInput>
+                        </mat-form-field>
+                    </td> -->
+                    <td>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="drpsubchnge" [placeholder]="'select'" required>
+                                    <mat-option value="0">Inactive</mat-option>
+                                    <mat-option value="1">Active</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    <td>
+                        <button mat-mini-fab color="warn" (click)="tmp=0" style="outline:none">
+                        <span class="fa fa-close"></span>
+                    </button>
+                    <button mat-mini-fab color="primary" (click)="tmp=0" style="outline:none;margin-left:10px">
+                            <span class="fa fa-save"  (click)="funupdatesubsubcat()"></span>
+                        </button>
+                    </td>
+
+                </ng-template>
+        </div>
+    </div>
+</div>
+<pagination-controls (pageChange)="pno=$event"></pagination-controls>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <div class="nav">
+        <div class="col-sm-12">
+            <h1>SubSub Category Name</h1>     
+            &nbsp;
+            <mat-form-field style="color:black; font-size:20px;width:50%" [formGroup]="myform">
+                <input type="text" placeholder="SubSub Category Name" matInput [(ngModel)]="txtsubsubcat" formControlName="txtsubsubcat">
+            </mat-form-field>
+            <br><br>
+            <span *ngIf="myform.controls.txtsubsubcat.touched && myform.controls.txtsubsubcat.errors && myform.controls.txtsubsubcat.errors.required" class="alert alert-danger"> 
+                Required SubSubCatName....!
+            </span>
+            <span *ngIf="myform.controls.txtsubsubcat.valid" class="alert alert-success">Valid SubSubCatName....!</span>
+            <br><br>
+            <mat-form-field style="color:black; font-size:20px;width:50%" [formGroup]="myform">
+                    <input type="text" placeholder="Sub Category Name" matInput [(ngModel)]="txtsubcat" formControlName="txtsubcat">
+                </mat-form-field>
+                <br><br>
+                <span *ngIf="myform.controls.txtsubcat.touched && myform.controls.txtsubcat.errors && myform.controls.txtsubcat.errors.required" class="alert alert-danger"> 
+                    Required SubCatName....!
+                </span>
+                <span *ngIf="myform.controls.txtsubcat.valid" class="alert alert-success">Valid SubCatName....!</span>
+                <br><br>
+                <mat-form-field style="color:black; font-size:20px;width:50%" [formGroup]="myform">
+                        <input type="text" placeholder="Category Name" matInput [(ngModel)]="txtcatname" formControlName="txtcatname">
+                    </mat-form-field>
+                    <br>
+                    <span *ngIf="myform.controls.txtcatname.touched && myform.controls.txtcatname.errors && myform.controls.txtcatname.errors.required" class="alert alert-danger"> 
+                        Required CatName....!
+                    </span>
+                    <span *ngIf="myform.controls.txtcatname.valid" class="alert alert-success">Valid CatName....!</span>
+                    <br><br><br>
+                <button mat-raised-button color="accent" style="outline:none; font-size:20px;" (click)="funsavesubsubcat()">
+                     <span class="fa fa-tags" style="margin-left:-13px;"></span>Insert SubSubCategoryName</button>
+                     <br><br>
+                     <mat-form-field style="font-size:20px;width:50%">
+                         <input type="text" placeholder="Search SubSub Category Name" matInput [(ngModel)]="searchsubsubcat">
+                         <i class="fa fa-search" style="font-size: 30px; float: right; outline: none; color: grey;"></i>
+                        </mat-form-field>
+                     <br><br>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                    
+                    <th (click)="subasds=!subasds">SubSubCategory
+                        <span class="fa fa-sort-desc" *ngIf=asds></span>
+                       <span class="fa fa-sort-asc" *ngIf=!asds></span> 
+                    </th>
+                    <th>Subcatname</th>
+                    <th>Catname</th>
+                    <th>Status</th>
+                    <th>Operation</th>
+                </tr>
+                 </thead>
+                 <tbody>
+                    <tr *ngFor="let x of subsubtbl|paginate:{itemsPerPage:3,currentPage:pno}|filter:searchsubsubcat|orderBy:'subsubcatname':subasds">
+                        
+                        <ng-container *ngIf="tmp!=x._id;else editrow">
+                        <td>{{x.subsubcatname}}</td>
+                        <td>{{x.subcatname}}</td>
+                        <td>{{x.catname}}</td>
+                        <td>
+                            <span *ngIf="x.active==0">Inactive</span>
+                            <span *ngIf="x.active==1">Active</span>
+                        </td>
+                        <td>
+                            <button mat-fab color=accent style="height:40px;width:40px;outline:none" (click)="funedit(x)">
+                                <span class="fa fa-edit" style="font-size:20px; margin-left:5px; margin-top:-15px;"></span>
+                            </button>
+                        </td>
+                    </ng-container>
+                    </tr>
+                </tbody>
+                </table>
+
+                <ng-template #editrow>
+                    <td>
+                    <mat-form-field>
+                        <input type="text" placeholder="create subsubcatname" matInput [(ngModel)]="subsubcatname">
+                    </mat-form-field>
+                </td>
+                    <td>
+                            <mat-form-field>
+                                <input type="text" placeholder="change subcat name" [(ngModel)]="subcatname" matInput>
+                            </mat-form-field>
+                        </td>
+                    <td>
+                        <mat-form-field>
+                            <input type="text" placeholder="change cat name" [(ngModel)]="catname" matInput>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="drpsubchnge" [placeholder]="'select'" required>
+                                    <mat-option value="0">Inactive</mat-option>
+                                    <mat-option value="1">Active</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    <td>
+                        <button mat-mini-fab color="warn" (click)="tmp=0" style="outline:none">
+                        <span class="fa fa-close"></span>
+                    </button>
+                    <button mat-mini-fab color="primary" (click)="tmp=0" style="outline:none;margin-left:10px">
+                            <span class="fa fa-save"></span>
+                        </button>
+                    </td>
+
+                </ng-template>
+        </div>
+    </div>
+</div>
+<pagination-controls (pageChange)="pno=$event"></pagination-controls> -->

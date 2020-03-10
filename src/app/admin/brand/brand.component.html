@@ -1,1 +1,53 @@
-<p>brand works!</p>
+<div class="container">
+        <form [formGroup]="myform">
+      <div>
+        <mat-form-field   class="mt-3">
+            <input type="text" placeholder="Enter Brand"  [(ngModel)]="brandname" matInput   >
+        </mat-form-field>
+        
+      <br>
+      <input type="submit" value="Add Brand" class="btn btn-primary" >
+      </div>
+        </form>
+        <br><br>
+        <input type="text" class="form-control" placeholder="Search...." [(ngModel)]="searchcategory">
+
+      <br>
+      <table class="table table-striped">
+        <thead style="background-color:rgb(233, 174, 245)">
+        <th>Brand Name</th>
+        <th>Active</th>
+        <th>Operations</th>
+      </thead>
+        <tbody style="background: rgb(181, 240, 246)">
+        <tr *ngFor="let x of brand_data | filter : searchcategory  | paginate:{itemsPerPage:2,currentPage:pno}">
+            <ng-container *ngIf="x._id!=tmp;else elsediv">
+            <td>{{x.brandName}}</td>
+            <td>
+              <span *ngIf="x.active==1">Active</span>
+              <span *ngIf="x.active==0">Inactive</span>
+            </td>
+            <td><input type="button" value="Edit" class="btn btn-danger" ></td>
+          </ng-container>
+          </tr> 
+          </tbody>
+      </table>
+      <ng-template #elsediv>
+        <td>
+          <mat-form-field style="width:200px">
+          <input type="text" matInput [(ngModel)]="txtbrandname">
+        </mat-form-field>
+        </td>
+        <td>
+          <mat-select  [(ngModel)]="drpstatus" class="form-control" style="width:200px" >
+              <mat-option value="1">Active</mat-option>
+              <mat-option value="0">InActive</mat-option>
+            </mat-select>
+        </td>
+        <td><input type="button" value="Cancel" class="btn btn-warning" (click)="tmp=0">
+        <input type="button" value=" Save " class="btn btn-success" (click)="funsave()" style="margin-left:15px"></td>
+         
+      </ng-template>
+    </div>
+    <pagination-controls (pageChange)="pno=$event"></pagination-controls>
+    

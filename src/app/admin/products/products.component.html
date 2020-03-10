@@ -1,1 +1,243 @@
-<p>products works!</p>
+{{rowData | json}}
+<h1 style="text-align: center;">Products List</h1>
+<hr>
+<div class="container">
+    <form id="frm1" action="http://localhost:1234/productspath/moveimages" 
+    enctype="multipart/form-data"
+    method="POST">
+    <div class="row">
+    
+<div class="col-sm-12">
+        <mat-form-field appearance="outline" style="width: 90%;" [formGroup]="myform">
+                <mat-label>Productname
+                </mat-label>
+                <input type="text" matInput name="pname" [(ngModel)]="txtname" formControlName="pname">
+            </mat-form-field>  
+            <br>
+<span *ngIf="submitted && myform.controls.pname.errors &&
+             myform.controls.pname.errors.required" class="alert alert-danger">
+              Enter Product Name</span>  
+              <br><br>
+</div>
+
+<div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field  style="width: 80%;" appearance="outline" [formGroup]="myform">
+            <mat-label> Select Catid</mat-label>
+                <mat-select [(ngModel)]="drpcat" name="drpcat" formControlName="cat">
+                    <mat-option *ngFor="let cat of comser.catdata" value="{{cat._id}}">{{cat.catname}}</mat-option>
+                </mat-select>
+            </mat-form-field>  
+            <br>
+            <span *ngIf="submitted && myform.controls.cat.errors &&
+              myform.controls.cat.errors.required" class="alert alert-danger"> 
+              Select Category Name</span>  
+<br><br>
+</div>
+
+<div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field  style="width: 80%;" appearance="outline" [formGroup]="myform">
+                <mat-label> Select SubCatid</mat-label>
+                <mat-select [(ngModel)]="drpsubcat" name="drpsubcat" formControlName="subcat">
+                <ng-container  *ngFor="let subcat of comser.subcatdata">
+                    <mat-option *ngIf="drpcat==subcat.cat_id" value="{{subcat._id}}">{{subcat.subcatname}}</mat-option>
+                </ng-container>
+
+                </mat-select>
+            </mat-form-field> 
+            <br>
+<span *ngIf="submitted && myform.controls.subcat.errors &&
+             myform.controls.subcat.errors.required" class="alert alert-danger">
+              Select SubCategory Name</span>   
+              <br><br>
+</div>
+
+<!-- {{drpcat}}--
+    {{drpsubcat}}--
+    {{drpsubsubcat}} -->
+<div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field  style="width: 80%;" appearance="outline" [formGroup]="myform">
+                <mat-label> Select SubSubCatid</mat-label>
+
+                <mat-select [(ngModel)]="drpsubsubcat" name="drpsubsubcat" formControlName="subsubcat">
+                    <ng-container *ngFor="let subsubcat of comser.subsubcatdata" >
+                    <mat-option  *ngIf="drpsubcat==subsubcat.subcat_id" value="{{subsubcat._id}}">{{subsubcat.subsubcatname}}</mat-option>
+                </ng-container>
+                </mat-select>
+            </mat-form-field>    
+            <br>
+<span *ngIf="submitted && myform.controls.subsubcat.errors &&
+myform.controls.subsubcat.errors.required" class="alert alert-danger">
+ Select SubSubCategory Name</span>
+ <br><br>
+</div>
+
+<div class="col-sm-6"style="margin-top: -50px;">
+    <mat-form-field appearance="outline" style="width:80%" [formGroup]="myform">
+        <mat-label>
+            Color
+        </mat-label>
+        <input type="color" matInput [(ngModel)]="txtcolor" name="tcolor" formControlName="color">
+    </mat-form-field>
+    <br>
+<span *ngIf="submitted && myform.controls.color.errors &&
+myform.controls.color.errors.required" class="alert alert-danger">
+Select Color</span>
+<br><br>
+
+</div>
+
+<div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field appearance="outline" style="width:80%" [formGroup]="myform">
+            <mat-label>
+                Old Price
+            </mat-label>
+            <input type="number" matInput [(ngModel)]="txtop" name="oldprice" formControlName="oldprice">
+        </mat-form-field>
+        <br>
+    <span *ngIf="submitted && myform.controls.oldprice.errors &&
+    myform.controls.oldprice.errors.required" class="alert alert-danger"> 
+    Enter OldPrice</span>
+    <br><br>
+
+    </div>
+    
+
+    <div class="col-sm-6"style="margin-top: -50px;" >
+        <mat-form-field appearance="outline" style="width:80%" [formGroup]="myform">
+            <mat-label>
+                New Prize
+            </mat-label>
+            <input type="number" matInput [(ngModel)]="txtnp" name="newprice" formControlName="newprice">
+        </mat-form-field>
+        <br>
+        <span *ngIf="submitted && myform.controls.newprice.errors &&
+             myform.controls.newprice.errors.required" class="alert alert-danger"> 
+             Enter NewPrice</span>
+             <br><br>
+
+    </div>
+    
+    <div class="col-sm-6"style="margin-top: -50px;">
+             <mat-form-field appearance="outline" style="width:80%" [formGroup]="myform">
+            <mat-label>Description</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="txtdesptn" name="desptn" formControlName="description"></textarea>
+        </mat-form-field>
+        <br>
+    <span *ngIf="submitted && myform.controls.description.errors &&
+         myform.controls.description.errors.required" class="alert alert-danger">
+         Type Description</span>
+         <br><br>
+
+
+    </div>
+    
+    <div class="col-sm-6"style="margin-top: -50px;" >
+        <mat-form-field appearance="outline" style="width:80%" [formGroup]="myform">
+            <mat-label> Offers</mat-label>
+            <textarea matInput rows="3" [(ngModel)]="txtoffer" name="offers" formControlName="offer"></textarea>
+        </mat-form-field>
+        <br>
+    <span *ngIf="submitted && myform.controls.offer.errors &&
+         myform.controls.offer.errors.required" class="alert alert-danger">
+          Offers....</span>
+          <br><br>
+
+    </div>
+    
+    <div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field appearance="outline" style="width: 80%;" [formGroup]="myform">
+            <mat-label>
+                Rating
+            </mat-label>
+            <input type="text" matInput [(ngModel)]="txtrtng" name="rtng" formControlName="rating">
+        </mat-form-field>
+        <br>
+        <span *ngIf="submitted && myform.controls.rating.errors &&
+             myform.controls.rating.errors.required" class="alert alert-danger">
+             Rating Required....</span>
+             <br><br>
+    
+
+    </div>
+
+
+    <div class="col-sm-6"style="margin-top: -50px;">
+        <mat-form-field style="width: 80%;" appearance="outline" [formGroup]="myform">
+                <mat-label> Product Type</mat-label>
+
+            <mat-select [(ngModel)]="txtprotype" name="protype" formControlName="producttype">
+                <mat-option value="1">New Collection</mat-option>
+                <mat-option value="2">Fast Selling Collection</mat-option>
+                <mat-option value="3">Upcoming Collections</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+    <span *ngIf="submitted && myform.controls.producttype.errors &&
+         myform.controls.producttype.errors.required" class="alert alert-danger">
+          Select Product Type</span>
+          <br><br>
+    </div>
+    
+    <!-- <div class="col-sm-6" [formGroup]="myform">
+        <input type="file" [(ngModel)]="imgfile" name="file1" formControlName="file" multiple="true" >
+
+        <br><br>
+<span *ngIf="submitted && myform.controls.file.errors &&
+     myform.controls.file.errors.required" class="alert alert-danger"> 
+     Choose Images</span>
+     <br><br>
+
+</div> -->
+<div class="col-sm-6"style="margin-top: -50px;"[formGroup]="myform">
+    <mat-form-field style="width:80%" appearance="outline" >
+        <mat-label>Quantity</mat-label>
+        <input type="number" [(ngModel)]="proQuantity" matInput name="proQuantity" formControlName="proQuantity">
+      </mat-form-field> 
+      <br>
+      <span *ngIf="submitted && myform.controls.proQuantity.errors &&
+      myform.controls.proQuantity.errors.required" class="alert alert-danger">QuantityRequired</span>
+</div>
+    <div class="col-sm-6" style="margin-top: -50px;">
+        <mat-form-field style="width:80%"  appearance="outline" [formGroup]="myform">
+            <mat-label>
+                Size
+            </mat-label>
+            <input tyep="text" matInput [(ngModel)]="txtsize" name="size" formControlName="size">
+        </mat-form-field>
+
+        <br>
+        <span *ngIf="submitted && myform.controls.size.errors &&
+             myform.controls.size.errors.required" class="alert alert-danger">
+              Select Size</span>
+              <br><br>
+        </div>
+        <div class="col-sm-6"style="margin-top: -50px;" [formGroup]="myform">
+            <input type="file" [(ngModel)]="imgfile" name="file1" formControlName="file" multiple="true" >
+    
+            <br><br>
+    <span *ngIf="submitted && myform.controls.file.errors &&
+         myform.controls.file.errors.required" class="alert alert-danger"> 
+         Choose Images</span>
+         <br><br>
+    
+    </div>
+    <div class="col-sm-12"style="margin-top: -50px;">
+    <button  (click)="funsavepro()" class="btn btn-primary" style="width:20%; outline: none; margin-top: 30px; font-size:18px;"> 
+            <span class="fa fa-floppy-o" ></span> Save </button>
+            <br><br><br><br>
+</div>
+</div>
+</form>
+</div>
+
+<div class="container">
+<ag-grid-angular style="width:100%; height:200px;" 
+class="ag-theme-balham" [rowData]="rowData" 
+[columnDefs]="column" [modules]="modules">
+</ag-grid-angular>
+</div>
+
+
+
+<!-- {{comser.subsubcatdata | json}} -->
+<!-- {{rowData | json}} -->

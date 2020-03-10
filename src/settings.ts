@@ -1,7 +1,6 @@
 export class Settings {
-//serverUrl:string="http://localhost:1000"
-
-
+    constructor(){
+this.serUrl="http://localhost:1234"
+    }
+    serUrl:string
 }
-
-

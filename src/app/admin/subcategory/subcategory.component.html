@@ -3,42 +3,62 @@
         <div class="col-sm-12">
             <h1>SubCategory</h1>
             <br>
-<mat-form-field style="color:black; font-size:30px; width:100%">
-    <input type="text" matInput placeholder="Enter SubCategory Name">
+<mat-form-field style="color:black; font-size:20px; width:30%" [formGroup]="myform">
+    <input type="text" matInput placeholder="Enter SubCategory Name" [(ngModel)]="txtsubcat" formControlName="subcatname">
 </mat-form-field>
-
-<mat-form-field style="color:black; font-size:30px; width:100%">
-<input type="text" placeholder="Category Name" matInput>
+<br>
+<span *ngIf="submitted && myform.controls.subcatname.errors && myform.controls.subcatname.errors.required" 
+class="alert alert-danger">
+    Required SubCatName....!
+</span>
+<span *ngIf="myform.controls.subcatname.valid" class="alert alert-success"> Valid SubCatName....!</span>
+<br><br>
+<mat-form-field [formGroup]="myform" style="width:30% ;">
+<mat-select [(ngModel)]="txtcatname" formControlName="catname" >
+<mat-option value="{{x._id}}" *ngFor="let x of catdata">
+    {{x.catname}}
+</mat-option>
+</mat-select>
 </mat-form-field>
+<br>
+<span *ngIf="submitted && myform.controls.catname.errors && myform.controls.catname.errors.required" 
+class="alert alert-danger">
+    Required CatName....!
+</span>
+<span *ngIf="myform.controls.catname.valid" class="alert alert-success"> Valid CatName....!</span>
+<br><br>
 
-
-<button type="button" mat-raised-button color=accent style="margin-bottom:30px; outline: none;">
+<button type="button" mat-raised-button color=accent style="margin-bottom:20px; outline: none;" (click)="funsavesubcat()">
     <span class="fa fa-tags" style="font-size: 20px; margin-left:-13px;">
-    </span>  SubCategory</button>
-    <br>
-    <mat-form-field  style="color:black; font-size:30px; width:100%">
+    </span> Insert SubCatData</button>
+    <br><br>
+    <mat-form-field  style="color:black; font-size:20px; width:50%">
         <input type="text" placeholder="Search SubCategory Name" matInput [(ngModel)]="searchstatus">
+        <i class="fa fa-search" style="font-size: 20px; float: right; outline: none; color: grey;"></i>
     </mat-form-field>
 </div>
 <br><br>
 <div class="col-sm-12">
     <table class="table table-striped">
+        <thead>
         <tr>
-            <th>Catid</th>
-            <th>Sno</th>
-            <th (click)="ord=!ord">SubCategory
-                <span class="fa fa-sort-desc" *ngIf="ord"></span>
-                <span class="fa fa-sort-asc" *ngIf="!ord"></span>         
+            <th (click)="asds=!asds">SubCategory
+                <span class="fa fa-sort-desc" *ngIf=asds></span>
+                <span class="fa fa-sort-asc" *ngIf=!asds></span>           
                      </th>
+                     <th>Catname</th>
+
             <th>Status</th>
             <th>Operation</th>
         </tr>
-        <tr *ngFor="let x of tblsubcategory |paginate:{itemsPerPage:4,currentPage:pno} |orderBy:'subcatname':ord |filter:searchstatus">
-
-           <td>{{x.catid}}</td>
-            <td>{{x._id}}</td>
-            <ng-container *ngIf="tmp!=x._id; else elsediv">
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of tblcat |paginate:{itemsPerPage:4,currentPage:pno} |orderBy:'subcatname':asds |filter:searchstatus">
+            
+          <ng-container *ngIf="tmp!=x._id; else change">
             <td>{{x.subcatname}}</td>
+            <td>{{x.categorydata.catname}}</td>
+
             <td>
                 <span *ngIf="x.active==0">Inactive</span>
                 <span *ngIf="x.active==1">Active</span>
@@ -56,26 +76,48 @@
             </td>
         </ng-container>
         </tr>
+    </tbody>
     </table>
-   <ng-template #elsediv>
-<mat-form-field>
-    <input type="text" placeholder="change text" matInput [(ngModel)]="txtsubcat">
-</mat-form-field>
-<td>
+   <ng-template #change>
+       <td>
+           <mat-form-field>
+               <input type="text" placeholder="Edit SubCat Data" matInput  [(ngModel)]="txtsubcatname">
+           </mat-form-field>
+       </td>
+
+       <td>
+           <mat-form-field>
+               
+               
+            <!-- <input type="text" placeholder="Edit Cat Data" matInput [(ngModel)]="tmpcatname"> -->
+
+            <mat-select [(ngModel)]="tmpcatname" [placeholder]="'Edit Cat Data'" required>
+                <mat-option *ngFor="let x of catdata" value="{{x._id}}">
+                    {{x.catname}}
+
+                </mat-option>
+            </mat-select>
+           </mat-form-field>
+       </td>
+      
+
+
+ <td>
     <mat-form-field>
-        <mat-select [(ngModel)]="dropdownstatus" [placeholder]="'Select'" required>
+        <mat-select [(value)]="drpchnge" [placeholder]="'Select'" required>
         <mat-option value="1">Active</mat-option>
         <mat-option value="0">Inactive</mat-option>
     </mat-select>
     </mat-form-field>
 </td>
-<td>
 
+
+<td>
         <button mat-mini-fab color="warn" (click)="tmp=0" style="outline:none">
                 <span class="fa fa-close"></span>
     </button>
-    <button mat-mini-fab color="primary" style="outline: none; margin-left:10px;">
-       <span class="fa fa-save"></span>
+    <button  (click)="funsubcatdata()" mat-mini-fab color="primary" (click)="tmp=0" style="outline: none; margin-left:10px;">
+       <span class="fa fa-save" ></span>
     </button>
 </td>
 

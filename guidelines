@@ -34,3 +34,22 @@ cretae two component in admin folder
          >ng g c login
          >ng g c notauthrozied
 Go to          
+
+
+
+................................................
+           category dat server side urls  
+Getdata:http://localhost:1234/catpath/getcatdata
+postdata:http://localhost:1234/catpath/insertcatdata
+          subcategory dat server side urls 
+Getdata :http://localhost:1234/subcatpath/getsubcatdata
+Postdata:http://localhost:1234/subcatpath/getsubcatdata/inssubcatdata
+          subsubcategory data server side urls
+Getdata :http://localhost:1234/subsubcatpath/getsubsubcatdata
+Postdata:http://localhost:1234/subsubcatpath/inssubsubcatdata
+....................................................................
+https://stackoverflow.com/questions/22318119/i-am-getting-failed-to-load-resource-neterr-blocked-by-client-with-google-chr
+
+The code formatting is available in Visual Studio Code through the following shortcuts:
+
+On Windows Shift + Alt + F

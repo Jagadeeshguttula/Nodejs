@@ -1,0 +1,33 @@
+<div class="container">
+    <h3>Your Cart: <span class="fa fa-shopping-bag" style="font-size: 35px; color:rgb(22, 78, 143);"></span> </h3>
+    <div class="row" *ngFor="let cart of cart_data;index as i" style="margin-bottom: 10px">
+        <div class="col-sm-2" >
+            <img class="img-thumbnail" src="../../../assets/productuploadimages/{{cart.image}}" width="100px" height="80px">
+       
+        </div>
+        <div class="col-sm-8" style="box-shadow: 0 0 5px silver;width:60%px;height: 140px;">
+            <h4>{{cart.pname}}</h4>
+           
+            <span style="color:green;font-size:15px">
+                {{cart.nprice | currency:"INR"}}
+                </span>
+                &nbsp;&nbsp;
+            <span *ngIf="cart.oprice!=0" style="color:red;font-size:14px;text-decoration: line-through;">
+                {{cart.oprice | currency:"INR"}}
+                </span>
+                <br><br>
+                <img (click)="fundec(i,cart.pid)" src="../../../assets/minus.png" width="25px" style="cursor:pointer">
+                <input id="txt{{i}}" type="text" style="outline:none;width:50px;padding:3px;border:1px solid silver;border-radius:3px;text-align:center"
+                 readonly value="{{cart.sqty}}" >
+                <img (click)="funinc(i,cart.totqty,cart.pid)" src="../../../assets/plus.png" width="25px" style="cursor:pointer">&nbsp;
+                &nbsp;&nbsp;Total: <span style="font-weight:bold;color:brown">{{cart.total}}</span>
+                <br>
+
+            <button  class="fa fa-trash" style="float:right;color:whitesmoke;font-size:25px;background-color:red;outline: none;margin-top: -15px;" (click)="fundel(cart.pname)"></button>
+        </div>
+        
+        
+    </div>
+    <h3 style="color:blue;font-weight:bold;float:right;margin-right:150px">Grand total:{{grand_total}}
+    &nbsp;<input type="button" value="Continue to shop" class="btn btn-success" routerLink="../payment"></h3>
+</div>

@@ -1,0 +1,291 @@
+<div id="header">
+  <!-- header -->
+  <div class="top">
+    <!-- top -->
+    <div class="container">
+      <ul class="top-support">
+        <li><i class="fa fa-phone-square"></i><span>+91 9912345678</span></li>
+        <li><a href=""><i class="fa fa-envelope-square"></i><span>info@originalprice.com</span></a></li>
+      </ul>
+      <div class="top-offers">
+        <div class="alert alert-warning alert-dismissible fade in offers" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i
+                class="fa fa-times-circle"></i></span></button>
+          Free Shipping <a href="">on All Orders Over</a>
+        </div>
+      </div>
+      <div class="top-control">
+        <a href="">Track Order</a><span>•</span>
+        <a (click)="funlogindiv()" *ngIf="!funUserLoggedIn()" style="cursor: pointer;">
+          SignUp & LogIn <span class="fa fa-sign-in" style="color: white; font-size: 15px;"></span></a>
+        <a (click)="funUserLoggedOut()" *ngIf="funUserLoggedIn()" style="cursor: pointer;">
+          LogOut <span class="fa fa-power-off" style="color: red; font-size: 15px;"> </span></a>
+
+      </div>
+      <div class="clearfix"></div>
+      <div class="top-offers show-mobile">
+        <div class="alert alert-warning alert-dismissible fade in offers" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i
+                class="fa fa-times-circle"></i></span></button>
+          Free Shipping <a href="">on All Orders Over</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- top -->
+
+  <div id="believe-nav">
+    <!-- Nav -->
+    <div class="container">
+      <div class="min-marg">
+        <nav class="navbar navbar-default">
+          <!-- <div class="container-fluid"> -->
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"><img src="../../../assets/images/logo.png" alt="" width="60px"
+                height="60px;"></a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a [routerLink]="hm">Home <span class="sr-only">(current)</span></a></li>
+              <li class="search">
+                <div>
+                  <input type="text" style="width: 700px;height: 40px;border-radius: 8px;outline: none;"
+                  class="form-control" id="txtsea" placeholder="search" 
+                  (keyup)="funsearch()" 
+                  [(ngModel)]="txtsearch">
+                  <div style="background-color: wheat;box-shadow:0px 1px 5px black;min-height:400px;width:800px;padding:5px;border-radius:5px;display:none;position:absolute;z-index:1003"  id="divsearch">
+                    <li *ngFor="let proinfo of searchdata">
+                      <a [routerLink]="['productinfo',{pid:proinfo._id}]">{{proinfo.pname}}</a>
+                    </li>
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              <li><a routerLink="addtocart"><img src="../../../assets/images/bag.png" alt="bag">
+                  <span style="font-weight:bold;padding:5px;background-color:orangered;
+                                    color:white;border-radius:50%;position:relative;right:30px;width:30px;
+                                    text-align:center;margin-right:70px;margin-top:15px">
+                    {{tot_items}}</span></a></li>
+              <li id="open-srch-form-mod">
+                <div>
+                  <form class="side-search">
+                    <div class="input-group">
+                      <input type="text" class="form-control search-wid" placeholder="Search Here"
+                        aria-describedby="basic-addon1">
+                      <a href="" class="input-group-addon btn-side-serach" id="basic-addon1"><i
+                          class="fa fa-search"></i></a>
+                    </div>
+                  </form>
+                </div>
+              </li>
+            </ul>
+
+          </div><!-- /.navbar-collapse -->
+          <!--</div> -->
+
+        </nav>
+      </div>
+      <div class="srch-form">
+        <form class="side-search">
+          <div class="input-group">
+            <input type="text" class="form-control search-wid" placeholder="Search Here"
+              aria-describedby="basic-addon2">
+            <a href="" class="input-group-addon btn-side-serach" id="basic-addon2"><i class="fa fa-search"></i></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div> <!-- Nav -->
+
+  <div id="cat-nav">
+    <div class="">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#cat-nav-mega">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="cat-nav-mega">
+          <ul class="nav navbar-nav">
+            <li class="dropdown menu-large" *ngFor="let cat of catdata">
+              <a href="#" class="dropdown-toggle" da ta-toggle="dropdown" role="button"
+                aria-expanded="false">{{cat.catname}} <i class="fa fa-angle-down"></i></a>
+              <ul class="dropdown-menu megamenu" role="menu">
+                <li>
+                  <div class="">
+                    <ng-container *ngFor="let sub of subcatdata">
+                      <div class="mega-sub" *ngIf="cat._id==sub.cat_id" style="font-size: 15px;font-weight: bold;">
+                        {{sub.subcatname}} <span class="fa fa-caret-right" style="font-size:15px;color: grey;"></span>
+                        <div class="mega-sub-title"></div>
+                        <ul>
+                          <ng-container *ngFor="let subsub of subsubcatdata">
+                            <li *ngIf="sub._id==subsub.subcat_id">
+                              <a [routerLink]="['./products',{subsubcatid:subsub._id}]">{{subsub.subsubcatname}}</a>
+                            </li>
+                          </ng-container>
+                        </ul>
+
+
+                      </div>
+                    </ng-container>
+
+                    <div class="mega-offers">
+                      <a href=""><img src="" class="img-responsive" alt=""></a>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li><a href="contact.html">OFFERS ZONE </a></li>
+            <!-- <li class="cat-img-off"><img src="" alt="off"></li> -->
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+        <!--</div> -->
+      </nav>
+    </div>
+  </div>
+</div> <!-- header -->
+<!-- Login div-->
+
+<div class="" id="logindiv" style="width:500px;display:none;height:300px;position:absolute;z-index:1001;left:32%;">
+  <!--Modal content-->
+  <div class="modal-content">
+    <!-- Modal body -->
+    <div class="modal-body">
+      <h2>Login</h2>
+      <hr>
+      <mat-form-field style="width:100%" appearance="outline">
+        <mat-label> <span class="fa fa-user"></span> Username</mat-label>
+
+        <input type="text" matInput [(ngModel)]="uname" name="Uname">
+
+      </mat-form-field>
+      <br>
+      <mat-form-field style="width:100%" appearance="outline">
+        <mat-label> <span class="fa fa-key"></span> Password </mat-label>
+        <input type="password" matInput [(ngModel)]="paswrd" name="Paswrd">
+      </mat-form-field>
+
+      <a href="#" style="color:blue;font-weight: bold;">Forgot Password</a>
+
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" (click)="UserLoginFormfun()">Login</button>
+      &nbsp;&nbsp; <button type="button" class="btn btn-warning" (click)="funregform()">Registration</button>
+      <button   type="button" class="close" (click)="funcloselogin()"
+        style="position:absolute;top:-30px;left:100%;font-size: 40px;outline: none;">
+        <img src="../../../assets/cancel.jpg" width="30px" style="margin-left: -52px;
+        margin-bottom: -58px"></button>
+    </div>
+  </div>
+</div>
+<div id="main"
+  style="display:none;z-index:1000;position:absolute;top:0px;left:0px;background-color: black;width:100%;height: 100%;opacity:0.6;">
+</div>
+<!-- Registration Form-->
+<div class="modal" id="regform" role="dialog">
+  <div class="modal-dialog" style="width:90%;height:90%;position: absolute;top:-10px;left:15%; ">
+    <div class="modal-content" style="width:80%;height:100%;">
+
+      <div class="modal-body">
+        <h3 style="text-align: center;">Registration Form</h3>
+        <hr>
+        <div class="col-md-12">
+          <form [formGroup]="MyRegForm">
+            <mat-form-field appearance="outline" style="width:45%;margin-right:10px">
+              <mat-label> <span class="fa fa-user"></span> Firstname</mat-label>
+              <input type="text" matInput [(ngModel)]="fname" name="Fname" formControlName="Firstname">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Firstname.errors && MyRegForm.controls.Firstname.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width:45%;margin-right:10px">
+              <mat-label> <span class="fa fa-user"></span> Lastname</mat-label>
+              <input type="text" matInput [(ngModel)]="lname" name="Lname" formControlName="Lastname">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Lastname.errors && MyRegForm.controls.Lastname.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width:45%;margin-right:10px">
+              <mat-label> <span class="fa fa-user"></span> Username</mat-label>
+              <input type="text" matInput [(ngModel)]="uname" name="uname" formControlName="Username">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Username.errors && MyRegForm.controls.Username.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width:45%;margin-right:10px">
+              <mat-label> <span class="fa fa-unlock"></span> Password</mat-label>
+              <input type="password" matInput id="hide" [(ngModel)]="paswrd" name="Paswrd" formControlName="Password">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Password.errors && MyRegForm.controls.Password.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+
+            <span class="fa fa-eye" id="show" (click)="toggleofpwd()"
+              style="font-size: 20px;margin-left: -35px;"></span>
+            <mat-form-field appearance="outline" style="width:45%;">
+              <mat-label> <span class="fa fa-envelope"></span> Email Address</mat-label>
+              <input type="email" matInput [(ngModel)]="email" name="Email" formControlName="Email">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Email.errors && MyRegForm.controls.Email.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width:45%;margin-left:10px">
+              <mat-label> <span class="fa fa-mobile"></span> Phone Number</mat-label>
+              <input type="text" matInput [(ngModel)]="pnumber" name="Pno" formControlName="Phonenumber">
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Phonenumber.errors && MyRegForm.controls.Phonenumber.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width:45%;margin-left:4px">
+              <mat-label> Address</mat-label>
+              <textarea rows="2" matInput [(ngModel)]="txtarea" name="Txtarea" formControlName="Textarea"></textarea>
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Textarea.errors && MyRegForm.controls.Textarea.errors.required" style="color: red;">
+                This Field is required
+            </span> -->
+            </mat-form-field>
+
+            <h4>Gender:</h4>
+            <mat-radio-group [(ngModel)]="gender" name="Gender" formControlName="Gender">
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+              <!-- <span *ngIf="submitted && MyRegForm.controls.Gender.errors && MyRegForm.controls.Gender.errors.required" style="color: red;">
+                    This Field is required
+                </span> -->
+            </mat-radio-group>
+          </form>
+          <button type="button" class="btn btn-primary clr3" style="height:35px;position: fixed;left:70%;top:80%"
+            (click)="funregisterform()">
+            <span class="fa fa-registered"></span> Register</button>
+        </div>
+
+      </div>
+      <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+      <button type="button" class="close closeicon" data-dismiss="modal">&times;</button>
+
+    </div>
+  </div>
+</div>

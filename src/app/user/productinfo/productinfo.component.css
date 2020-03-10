@@ -1,0 +1,30 @@
+.clr{
+    background-color: rgb(228, 27, 27);
+    color: white;
+
+
+    outline: none;
+    margin-left: 11px;
+}
+.clr:hover{
+    background-color: red;
+}
+.iconclr{
+    font-size: 30px;
+    color: deeppink;
+}
+.imagesmall{
+    width: 60px;
+    height: 60px;
+}
+.imagesmall:hover{
+    border:2px solid blue;
+    width: 100px;
+    height: 100px;
+    transition: 1s;
+}
+
+.zoomin{
+    width:150px;
+     height:230px
+}

@@ -1,9 +1,18 @@
 <div class="container">
     <div class="jumbotron">
-<input type="text" class="form-control" placeholder="uname"[(ngModel)]="txtuname">
+<form [formGroup]="myloginform">
+<input type="text" formControlName="uname" class="form-control" placeholder="uname"[(ngModel)]="txtuname">
+
+<span
+    *ngIf="submitted && myloginform.controls.uname.errors && myloginform.controls.uname.errors.required " style="color: red;">Enter username
+</span>
 <br>
-<input type="password" class="form-control" placeholder="pwd"[(ngModel)]="txtpwd">
+<input type="password" formControlName="pwd"class="form-control" placeholder="pwd"[(ngModel)]="txtpwd">
+<span
+    *ngIf="submitted && myloginform.controls.pwd.errors && myloginform.controls.pwd.errors.required " style="color: red;">Enter password
+</span>
 <br>
 <input type="button" class="btn btn-primary" value="login"(click)="funlogin()">
+</form>
     </div>
 </div>

@@ -1,19 +1,36 @@
 <div class="container">
         <div class="row">
             <div class="col-sm-12">
-    <mat-form-field style="color:blue; font-size:30px; width:100%">
-        <input type="text" matInput placeholder="Entername">
+    
+    <mat-form-field style="color:blue; font-size:20px; width:100%"[formGroup]="mycategory">
+        <input type="text"  matInput [(ngModel)]="txtcategory" placeholder="Entercategoryname"
+        formControlName="category">
     </mat-form-field>
-    <button type="button" mat-raised-button color=primary>Category</button>
+    <span *ngIf="submitted && mycategory.controls.category.errors && mycategory.controls.category.errors.required"  
+    class="alert alert-danger">Required CategoryName!</span>
+    <span *ngIf="mycategory.controls.category.valid" 
+     class="alert alert-success">Valid CategoryName....</span>
+     <br><br><br>
+    <!-- <span *ngIf="mycategory.controls.category.errors" style="color:red;font-size:25px">*</span>   -->
+    <mat-form-field>	
+        <mat-select [(ngModel)]="drpstatus" [placeholder]="'Select'">	
+            <mat-option value="1">Active</mat-option>	
+            <mat-option value="0">Inactive</mat-option>	
+        </mat-select>	
+    </mat-form-field> 
     <br>
-    <mat-form-field style="color:blue; font-size:30px; width:100%">
-        <input type="text" matInput placeholder="search"[(ngModel)]="Txtsearch">
+    <button type="button" mat-raised-button color=primary (click)="funsave()">Insert</button>
+    <br>
+   
+    <mat-form-field style="color:blue; font-size:20px; width:100%">
+        <input type="text" matInput placeholder="search"[(ngModel)]="searchstatus">
     </mat-form-field>
     </div>
     <div class="col-sm-12">
         <table class="table table-striped">
+                <thead style="background-color:#3f51b5;color:white">
             <tr>
-                <th>Serial Number</th>
+                <!-- <th>Serial Number</th> -->
                 <th (click)="ord=!ord"style="cursor:pointer">Category
                         <span class="fa fa-sort-desc" *ngIf="ord"></span>
                         <span class="fa fa-sort-asc" *ngIf="!ord"></span>
@@ -21,17 +38,19 @@
                 <th>Active</th>
                 <th>Operation</th>
             </tr>
-            <tr *ngFor="let x of tblcategory|filter:Txtsearch 
+            </thead>
+            <tbody>
+            <tr *ngFor="let x of tblcategory|filter:searchstatus
             |orderBy:'catname':ord 
             | paginate:{itemsPerPage:3,currentPage:pno}">
-             <td>{{x._id}}</td>
+             <!-- <td>{{x._id}}</td> -->
              
             <ng-container *ngIf="tmp!=x._id; else elsediv">
              <td>{{x.catname}}</td>
                    <td>
                     <span *ngIf="x.active==0">Inactive</span>
                     <span *ngIf="x.active==1">Active</span>
-                    </td>
+                    </td>             
                 <!-- <td>{{x.active}}</td> -->
                 <!-- <td>{{x.edit}} -->
                     <td>
@@ -42,9 +61,10 @@
                     <!-- <button mat-fab style="height: 40px;width: 40px;outline: none;margin-left:10px">
                     <span class="fa fa-trash"style="font-size:20px;margin-top:-15px"></span>
                     </button> -->
-                </td>
+                </td>                
             </ng-container>
             </tr>
+        </tbody>
         </table>
         <ng-template #elsediv>
             <td>
@@ -61,15 +81,16 @@
                 </mat-form-field>
             </td>
             <td>
-                <button mat-mini-fab color ="warn" (click)="tmp" style="margin-right:10px;">
+                <button mat-mini-fab color ="warn" (click)="tmp" style="margin-right:10px;"
+                (click)="cancelUpdate()">
                 <i class="fa fa-close"></i>
                 </button>
-                <button mat-mini-fab color="primary">
+                <button mat-mini-fab color="primary"(click)="funupdate()">
                 <i class="fa fa-save"></i>
                 </button>
             </td>
         </ng-template>
-    
-     <pagination-controls (pageChange)="pno = $event" ></pagination-controls> 
     </div>
+     <pagination-controls (pageChange)="pno = $event" ></pagination-controls> 
+    
     
