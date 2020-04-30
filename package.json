@@ -28,7 +28,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "material-design-icons-iconfont": "^5.0.1",
